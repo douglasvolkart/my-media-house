@@ -227,7 +227,7 @@ div.widget.animation {
          -o-transition: opacity 0.3s, -o-transform 0.3s;
             transition: opacity 0.3s, transform 0.3s;
 }
-div.widget:hover {
+div.widget:hover, div.widget:focus {
     z-index: 10;
     border: 3px solid rgba(255, 255, 255, 0.4);
     -webkit-transform: scale(1.05);
@@ -235,6 +235,7 @@ div.widget:hover {
         -ms-transform: scale(1.05);
          -o-transform: scale(1.05);
             transform: scale(1.05);
+    outline: none;
 }
 div.widget_link {
     cursor: pointer;

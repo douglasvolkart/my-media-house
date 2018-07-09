@@ -17,6 +17,7 @@
         init: function () {
             app.is_touch_device = "ontouchstart" in document.documentElement ? !0 : !1;
             app.cacheElements();
+            document.querySelector('[tabindex="0"]').focus();
             $(document).click(app.Events.onClick);
             app.is_touch_device ? $(document.body).addClass("touch") : $(document).mousedown(app.Events.onMouseDown).mouseup(app.Events.onMouseUp).mousemove(app.Events.onMouseMove);
             $(document.body).addClass("loaded");
