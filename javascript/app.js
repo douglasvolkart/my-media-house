@@ -92,6 +92,12 @@
                         document.querySelector('[tabindex="' + app.widget_current_focus + '"]').focus();
                     }
                 }
+
+                //enter
+                if (event.keyCode == 13) {
+                    var url = $('.widget[tabindex="' + app.widget_current_focus + '"]').data('url');
+                    alert('abrir a url do widget. url: ' + url);
+                }
             }
         }
     }
