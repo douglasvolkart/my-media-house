@@ -308,61 +308,67 @@ div.widget_blue,
 div.widget_blue div.main,
 div.widget_container.blue div.widget,
 div.widget_container.blue div.widget div.main {
-    background-color: #0097AA;
+    background-color: #0097aaa8;
 }
 div.widget_orange,
 div.widget_orange div.main,
 div.widget_container.orange div.widget,
 div.widget_container.orange div.widget div.main {
-    background-color: #F29500;
+    background-color: #F29500a8;
 }
 div.widget_red,
 div.widget_red div.main,
 div.widget_container.red div.widget,
 div.widget_container.red div.widget div.main {
-    background-color: #C23916;
+    background-color: #C23916a8;
 }
 div.widget_green,
 div.widget_green div.main,
 div.widget_container.green div.widget,
 div.widget_container.green div.widget div.main {
-    background-color: #94C849;
+    background-color: #94C849a8;
 }
 div.widget_darkgreen,
 div.widget_darkgreen div.main,
 div.widget_container.darkgreen div.widget,
 div.widget_container.darkgreen div.widget div.main {
-    background-color: #6FA014;
+    background-color: #6FA014a8;
 }
 div.widget_purple,
 div.widget_purple div.main,
 div.widget_container.purple div.widget,
 div.widget_container.purple div.widget div.main {
-    background-color: #91009B;
+    background-color: #91009Ba8;
 }
 div.widget_darkred,
 div.widget_darkred div.main,
 div.widget_container.darkred div.widget,
 div.widget_container.darkred div.widget div.main {
-    background-color: #BE213E;
+    background-color: #BE213Ea8;
 }
 div.widget_darkblue,
 div.widget_darkblue div.main,
 div.widget_container.darkblue div.widget,
 div.widget_container.darkblue div.widget div.main {
-    background-color: #3C7780;
+    background-color: #3C7780a8;
 }
 div.widget_yellow,
 div.widget_yellow div.main,
 div.widget_container.yellow div.widget,
 div.widget_container.yellow div.widget div.main {
-    background-color: #D9B700;
+    background-color: #D9B700a8;
 }
 div.widget_grey,
 div.widget_grey div.main,
 div.widget_container.grey div.widget,
 div.widget_container.grey div.widget div.main {
-    background-color: #4C4C4C;
+    background-color: #4C4C4Ca8;
+}
+div.widget_darknessred,
+div.widget_darknessred div.main,
+div.widget_container.darknessred div.widget,
+div.widget_container.darknessred div.widget div.main {
+    background-color: #982001a8;
 }
 
 /*
