@@ -588,6 +588,22 @@ Page Content
     padding-left: 55px;
 }
 
+
+#system_menu .btn-exit{
+    background-image: url(../images/icon-exit.png);
+    width: 45px;
+    height: 45px;
+    display: block;
+    background-size: contain;
+    opacity: 0.4;
+    bottom: 25px;
+    position: absolute;
+    left: 25px;
+}
+#system_menu .btn-exit:hover{
+    opacity: 1;
+}
+
 @-webkit-keyframes widget_preview {
     from {opacity: 0; -webkit-transform: translateY(-20px);}
     to {opacity: 1; -webkit-transform: translateY(0px)}

@@ -1,11 +1,12 @@
 {
   "name": "my-media-home",
+  "productName": "My Media Home",
   "version": "1.0.0",
   "description": "Media center for home",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "compile": "electron-packager C:\\Program Files MyMediaHouse --platform=win32 --arch=ia32"
+    "compile": "electron-packager . MyMediaHouse --asar=true --platform=win32 --arch=ia32 --overwrite --prune=true --out=release-builds --icon=images/icon.ico"
   },
   "repository": "https://github.com/douglasvolkart/my-media-house",
   "keywords": [
@@ -15,7 +16,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Douglas Volkart de Carvalho",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^2.0.0",
