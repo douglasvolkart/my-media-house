@@ -79,10 +79,12 @@
                     app.widget_scroll_container.css("left", c);
                     app.dragging_x = event.clientX;
                     app.left = c
+                    
                 }
             },
             onMouseDown: function (event) {
                 app.widget_open || (app.dragging_x = event.clientX)
+                console.log(event.clientX)
             },
             onMouseUp: function (event) {
                 if (!app.widget_open && app.dragging_x) {
