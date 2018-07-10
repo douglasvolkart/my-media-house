@@ -73,6 +73,71 @@
                             app.left = event, transition())
                 }
             },
+            onClick: function (element) {
+                element = $(element.target);
+                element.hasClass("widget") ? app.openWidget(element) :
+                    element.parents("div.widget").length && app.openWidget(element.parents("div.widget"))
+            },
+        },
+        openWidget: function (element) {
+            var name = element.data("name"),
+                link = element.data("link");
+            link && "" !== link ? window.open(link, "_blank") : $.trim(element.data("url")).length && (app.widget_open = element, window.location.hash = "#!/" + name, document.title = app.title_prefix + name, $("#widget_preview_content").remove(), app.widget_preview.addClass("open").css("background-color", element.find(".main").css("background-color")).css("background-image", element.find(".main").css("background-image")),
+                app.widget_scroll_container.hide(), app._loadWidget(element));
+            "undefined" !== typeof _gaq && _gaq.push(["_trackPageview", "#" + name])
+        },
+        closeWidget: function (b) {
+            window.location.hash = "";
+            document.title = a.title_prefix + "Metro Framework";
+            a.widget_scroll_container.show();
+            a.widget_preview.removeClass("open");
+            a.widget_open = !1;
+            setTimeout(function () {
+                $("#widget_preview_content").remove()
+            }, 300)
+        },
+
+        //melhorar legibilidade
+        _loadWidget: function (element, content) {
+            var name = element.data("name"),
+                showContentBackground = function (content) {
+                    app.widget_preview.css("background-image", "none");
+                    var content = $("#widget_preview_content");
+                    content.length ? content.html(content) : content = $("<div>").attr("id", "widget_preview_content").insertAfter(app.widget_sidebar).html(content);
+                    "true" !== k.getItem("melonhtml5_metro_ui_sidebar_first_time") && (app.widget_sidebar.addClass("open"), app.widget_sidebar.mouseenter(function () {
+                        k.setItem("melonhtml5_metro_ui_sidebar_first_time", "true", Infinity);
+                        $(this).removeClass("open")
+                    }))
+                },
+                dateNow = (new Date).getTime();
+            app.widget_preview.children("div.dot").remove();
+            for (var e = 1; 7 >= e; e++) $("<div>").addClass("dot").css("transition", "right " + (.6 + e / 10).toFixed(1) + "s ease-out").prependTo(app.widget_preview);
+            var toggleLoading = function () {
+                var divDots = $("div.dot");
+                divDots.length && (divDots.toggleClass("open"),
+                    setTimeout(toggleLoading, 1300))
+            },
+                loading = function (b) {
+                    var count = (new Date).getTime() - dateNow;
+                    1300 < count ? (app.widget_preview.children("div.dot").remove(), "undefined" !== typeof b && b()) : setTimeout(function () {
+                        app.widget_preview.children("div.dot").remove();
+                        "undefined" !== typeof b && b()
+                    }, 1300 - count)
+                };
+            app.widget_preview.width();
+            toggleLoading();
+            "undefined" === typeof content && (content = !0);
+            content && void 0 !== app.widget_page_data[name] ? loading(function () {
+                showContentBackground(app.widget_page_data[name])
+            }) : (e = $.trim(element.data("url")), 0 < e.length &&
+                //aqui cria a iframe
+                setTimeout(() => {
+                    window.open(e, '_blank');
+                    showContentBackground('');
+                    app.closeWidget('');
+                }, 4000)
+
+                )
         }
     }
 
