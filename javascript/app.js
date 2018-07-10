@@ -190,9 +190,16 @@ var app = {
             //aqui cria a iframe
 
             setTimeout(() => {
-               
-                window.open(e, '_blank');
-               
+                if (element.data("toolbar")) {
+                    var newWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true })
+                    newWindow.setMenuBarVisibility(true)
+                    // and load the index.html of the app.
+                    newWindow.loadFile(element.data("url"))
+
+                } else {
+                    window.open(e, '_blank');
+                }
+
                 showContentBackground('');
                 app.closeWidget('');
             }, 2000)
