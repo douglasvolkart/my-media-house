@@ -157,10 +157,10 @@ var app = {
     //melhorar legibilidade
     _loadWidget: function (element, content) {
         var name = element.data("name"),
-            showContentBackground = function (content) {
+            showContentBackground = function (background) {
                 app.widget_preview.css("background-image", "none");
                 var content = $("#widget_preview_content");
-                content.length ? content.html(content) : content = $("<div>").attr("id", "widget_preview_content").insertAfter(app.widget_sidebar).html(content);
+                content.length ? content.html(background) : content = $("<div>").attr("id", "widget_preview_content").insertAfter(app.widget_sidebar).html(background);
                 "true" !== util.getItem("melonhtml5_metro_ui_sidebar_first_time") && (app.widget_sidebar.addClass("open"), app.widget_sidebar.mouseenter(function () {
                     util.setItem("melonhtml5_metro_ui_sidebar_first_time", "true", Infinity);
                     $(this).removeClass("open")
@@ -190,18 +190,14 @@ var app = {
             //aqui cria a iframe
 
             setTimeout(() => {
-                if (element.data("toolbar")) {
-                    var newWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true })
-                    newWindow.setMenuBarVisibility(true)
-                    // and load the index.html of the app.
-                    newWindow.loadFile(element.data("url"))
 
-                } else {
-                    window.open(e, '_blank');
-                }
-
+                var newWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true })
+                newWindow.setMenuBarVisibility(true)
+                // and load the index.html of the app.
+                newWindow.loadFile(element.data("url"))
                 showContentBackground('');
-                app.closeWidget('');
+                app.closeWidget();
+
             }, 2000)
 
             )
