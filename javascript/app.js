@@ -11,13 +11,16 @@
         widget_open: !1,
         dragging_x: 0,
         left: 60,
+        widget_current_focus: 0,
         widget_page_data: [],
         is_touch_device: !1,
         title_prefix: "MyMediaHome - ",
         init: function () {
             app.is_touch_device = "ontouchstart" in document.documentElement ? !0 : !1;
             app.cacheElements();
+            document.querySelector('[tabindex="0"]').focus();
             $(document).click(app.Events.onClick);
+            $(document).keydown(app.Events.onKeypress);
             app.is_touch_device ? $(document.body).addClass("touch") : $(document).mousedown(app.Events.onMouseDown).mouseup(app.Events.onMouseUp).mousemove(app.Events.onMouseMove);
             $(document.body).addClass("loaded");
             app.widgets.each(function (index) {
@@ -78,6 +81,29 @@
                 element.hasClass("widget") ? app.openWidget(element) :
                     element.parents("div.widget").length && app.openWidget(element.parents("div.widget"))
             },
+            onKeypress: function (event) {
+                //left
+                if (event.keyCode == 37) {
+                    if (app.widget_current_focus > 0) {
+                        app.widget_current_focus -= 1;
+                        document.querySelector('[tabindex="' + app.widget_current_focus + '"]').focus();
+                    }
+                }
+
+                //right
+                if (event.keyCode == 39) {
+                    if (app.widget_current_focus < 13) {
+                        app.widget_current_focus += 1;
+                        document.querySelector('[tabindex="' + app.widget_current_focus + '"]').focus();
+                    }
+                }
+
+                //enter
+                if (event.keyCode == 13) {
+                    var url = $('.widget[tabindex="' + app.widget_current_focus + '"]').data('url');
+                    alert('abrir a url do widget. url: ' + url);
+                }
+            }
         },
         openWidget: function (element) {
             var name = element.data("name"),
