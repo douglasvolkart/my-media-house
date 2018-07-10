@@ -1,5 +1,33 @@
 (function () {
-    var app = {
+    var util = {
+        getItem: function(a) {
+            return a && this.hasItem(a) ? unescape(document.cookie.replace(RegExp("(?:^|.*;\\s*)" + escape(a).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1")) : null
+        },
+        setItem: function(a, c, d, f, h, e) {
+            if (a && !/^(?:expires|max\-age|path|domain|secure)$/i.test(a)) {
+                var g = "";
+                if (d) switch (d.constructor) {
+                    case Number:
+                        g = Infinity === d ? "; expires=Tue, 19 Jan 2038 03:14:07 GMT" : "; max-age=" + d;
+                        break;
+                    case String:
+                        g = "; expires=" + d;
+                        break;
+                    case Date:
+                        g = "; expires=" + d.toGMTString()
+                }
+                document.cookie =
+                    escape(a) + "=" + escape(c) + g + (h ? "; domain=" + h : "") + (f ? "; path=" + f : "") + (e ? "; secure" : "")
+            }
+        },
+        removeItem: function(a, c) {
+            a && this.hasItem(a) && (document.cookie = escape(a) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (c ? "; path=" + c : ""))
+        },
+        hasItem: function(a) {
+            return RegExp("(?:^|;\\s*)" + escape(a).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=").test(document.cookie)
+        }
+    },
+    app = {
         window_width: 0,
         window_height: 0,
         scroll_container_width: 0,
@@ -100,8 +128,9 @@
 
                 //enter
                 if (event.keyCode == 13) {
-                    var url = $('.widget[tabindex="' + app.widget_current_focus + '"]').data('url');
-                    alert('abrir a url do widget. url: ' + url);
+                    var element = $('.widget[tabindex="' + app.widget_current_focus + '"]');
+                    element.hasClass("widget") ? app.openWidget(element) :
+                    element.parents("div.widget").length && app.openWidget(element.parents("div.widget"))
                 }
             }
         },
@@ -114,10 +143,10 @@
         },
         closeWidget: function (b) {
             window.location.hash = "";
-            document.title = a.title_prefix + "Metro Framework";
-            a.widget_scroll_container.show();
-            a.widget_preview.removeClass("open");
-            a.widget_open = !1;
+            document.title = app.title_prefix + "myMediaHouse";
+            app.widget_scroll_container.show();
+            app.widget_preview.removeClass("open");
+            app.widget_open = !1;
             setTimeout(function () {
                 $("#widget_preview_content").remove()
             }, 300)
@@ -130,8 +159,8 @@
                     app.widget_preview.css("background-image", "none");
                     var content = $("#widget_preview_content");
                     content.length ? content.html(content) : content = $("<div>").attr("id", "widget_preview_content").insertAfter(app.widget_sidebar).html(content);
-                    "true" !== k.getItem("melonhtml5_metro_ui_sidebar_first_time") && (app.widget_sidebar.addClass("open"), app.widget_sidebar.mouseenter(function () {
-                        k.setItem("melonhtml5_metro_ui_sidebar_first_time", "true", Infinity);
+                    "true" !== util.getItem("melonhtml5_metro_ui_sidebar_first_time") && (app.widget_sidebar.addClass("open"), app.widget_sidebar.mouseenter(function () {
+                        util.setItem("melonhtml5_metro_ui_sidebar_first_time", "true", Infinity);
                         $(this).removeClass("open")
                     }))
                 },
@@ -161,7 +190,7 @@
                     window.open(e, '_blank');
                     showContentBackground('');
                     app.closeWidget('');
-                }, 4000)
+                }, 2000)
 
                 )
         }
