@@ -1,4 +1,6 @@
 (function () {
+    // Modules to control application life and create native browser window
+    const { BrowserWindow } = require('electron');
     var util = {
         getItem: function (a) {
             return a && this.hasItem(a) ? unescape(document.cookie.replace(RegExp("(?:^|.*;\\s*)" + escape(a).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1")) : null
@@ -187,8 +189,18 @@
                     showContentBackground(app.widget_page_data[name])
                 }) : (e = $.trim(element.data("url")), 0 < e.length &&
                     //aqui cria a iframe
+
                     setTimeout(() => {
-                        window.open(e, '_blank');
+                        if (element.data("toolbar") == "true") {
+                            var mainWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true})
+                            mainWindow.setMenuBarVisibility(true)
+                            // and load the index.html of the app.
+                            mainWindow.loadFile(e)
+
+                        } else {
+                            window.open(e, '_blank');
+                        }
+
                         showContentBackground('');
                         app.closeWidget('');
                     }, 2000)
