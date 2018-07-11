@@ -55,9 +55,19 @@ textarea, input, select {
     overflow: hidden;
     margin: 0px auto;
     position: absolute;
-    top: 8%;
+    top: 12%;
     left: 60px;
 }
+#title_container{
+    padding-top: 17px;
+}
+#title_container .title {
+    font-size: 47px;
+    color: #fff;
+    font-weight: lighter;
+    padding: 0px 67px;
+}
+
 #widget_preview {
     display: none;
     position: fixed;
@@ -357,7 +367,13 @@ div.widget_yellow,
 div.widget_yellow div.main,
 div.widget_container.yellow div.widget,
 div.widget_container.yellow div.widget div.main {
-    background-color: rgba(217, 183, 0, 0.8);
+    background-color: rgba(255, 217, 0, 0.8);
+}
+div.widget_white,
+div.widget_white div.main,
+div.widget_container.white div.widget,
+div.widget_container.white div.widget div.main {
+    background-color: rgba(224, 224, 224, 0.8);
 }
 div.widget_grey,
 div.widget_grey div.main,

@@ -201,8 +201,8 @@ var app = {
                 var color = element.css('backgroundColor');
                 color = util.hexc(color);
                 var newWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true, backgroundColor: color, alwaysOnTop: true })
-                newWindow.loadURL(e)
-                 app.closeWidget();
+                newWindow.loadURL(e)               
+                app.closeWidget();
 
             }, 2000)
 
