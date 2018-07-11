@@ -26,6 +26,13 @@ var util = {
     },
     hasItem: function (a) {
         return RegExp("(?:^|;\\s*)" + escape(a).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=").test(document.cookie)
+    },
+    hexc(rgb) {
+        rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+        return (rgb && rgb.length === 4) ? "#" +
+            ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+            ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+            ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
     }
 }
 var app = {
@@ -139,7 +146,7 @@ var app = {
     openWidget: function (element) {
         var name = element.data("name"),
             link = element.data("link");
-        link && "" !== link ? window.open(link, "_blank") : $.trim(element.data("url")).length && (app.widget_open = element, window.location.hash = "#!/" + name, document.title = app.title_prefix + name, $("#widget_preview_content").remove(), app.widget_preview.addClass("open").css("background-color", element.find(".main").css("background-color")).css("background-image", element.find(".main").css("background-image")),
+        link && "" !== link ? window.open(link, "_blank") : $.trim(element.data("url")).length && (app.widget_open = element, window.location.hash = "#!/" + name, document.title = app.title_prefix + name, $("#widget_preview_content").remove(), app.widget_preview.addClass("open").css("background-color", util.hexc(element.find(".main").css("background-color"))).css("background-image", element.find(".main").css("background-image")),
             app.widget_scroll_container.hide(), app._loadWidget(element));
         "undefined" !== typeof _gaq && _gaq.push(["_trackPageview", "#" + name])
     },
@@ -191,12 +198,11 @@ var app = {
 
             setTimeout(() => {
 
-                var newWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true })
-                newWindow.setMenuBarVisibility(true)
-                // and load the index.html of the app.
-                newWindow.loadFile(element.data("url"))
-                showContentBackground('');
-                app.closeWidget();
+                var color = element.css('backgroundColor');
+                color = util.hexc(color);
+                var newWindow = new BrowserWindow({ width: 1366, height: 768, fullscreen: true, backgroundColor: color })
+                newWindow.loadURL(e)
+                 app.closeWidget();
 
             }, 2000)
 
