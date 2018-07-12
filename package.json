@@ -1,6 +1,6 @@
 {
-  "name": "my-media-home",
-  "productName": "My Media Home",
+  "name": "my-media-house",
+  "productName": "My Media House",
   "version": "1.0.0",
   "description": "Media center for home",
   "main": "main.js",

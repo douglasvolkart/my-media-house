@@ -50,7 +50,7 @@ var app = {
     widget_current_focus: 0,
     widget_page_data: [],
     is_touch_device: !1,
-    title_prefix: "MyMediaHome - ",
+    title_prefix: "My Media House - ",
     init: function () {
         app.is_touch_device = "ontouchstart" in document.documentElement ? !0 : !1;
         app.cacheElements();

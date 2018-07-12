@@ -60,12 +60,14 @@ textarea, input, select {
 }
 #title_container{
     padding-top: 17px;
+    user-select: none;
 }
 #title_container .title {
     font-size: 47px;
     color: #fff;
     font-weight: lighter;
     padding: 0px 67px;
+    user-select: none;
 }
 
 #widget_preview {
